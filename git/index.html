@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Git - Grappus Android Guidelines</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="..">Grappus Android Guidelines</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="..">Home</a>
+                            </li>
+                            <li class="active">
+                                <a href="./">Git</a>
+                            </li>
+                            <li >
+                                <a href="../android/">Android</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="..">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="../android/">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#git">Git</a></li>
+            <li><a href="#cloning-a-repo">Cloning a repo</a></li>
+            <li><a href="#connecting-your-web-repository-to-project-management-tool">Connecting your web repository to project management tool.</a></li>
+            <li><a href="#git-alias">Git Alias</a></li>
+            <li><a href="#jira-linking">Jira Linking</a></li>
+            <li><a href="#branch-naming">Branch Naming</a></li>
+            <li><a href="#commit-message-format">Commit message format</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="git">Git</h1>
+<p>We use <a href="https://git-scm.com">git</a> to help us manage changes to source code over time.</p>
+<p>We are assuming that you are famaliar with git to a fair extent.</p>
+<h2 id="cloning-a-repo">Cloning a repo</h2>
+<p>Before cloning a repo make sure you have correct accessrights. </p>
+<h2 id="connecting-your-web-repository-to-project-management-tool">Connecting your web repository to project management tool.</h2>
+<p>As of now we use <a href="https://bitbucket.org">Bitbucket</a> for web-based version control repository hosting service and 
+<a href="https://grappus.atlassian.net">Jira</a> as our project management tool.</p>
+<p>Please contact your project manager to set up workflows which will help in automating issue/ticket tracking process.</p>
+<h2 id="git-alias">Git Alias</h2>
+<p>Git aliases are a powerful workflow tool that create shortcuts to frequently used Git command or a set of Git commands.</p>
+<h2 id="jira-linking">Jira Linking</h2>
+<p>Generally all of your issues are mentioned in the project management tool. This helps in keeping record of the productive time you spend working for the company.</p>
+<h2 id="branch-naming">Branch Naming</h2>
+<p>Git branches are effectively a pointer to a snapshot of your changes. When you want to add a new feature or fix a bug—no matter how big or how small—you spawn a new branch to encapsulate your changes. If you have not created a new branch till yet go ahead and create one.</p>
+<p>Most of time time branched should be created by your issue/ticket number in Jira.</p>
+<p><code>Your jira project prefix  -Dash-  Issue number</code></p>
+<h3 id="here-are-a-few-examples-of-how-the-branch-should-be-named">Here are a few examples of how the branch should be named.</h3>
+<p>Ideally you should work with one ticket at a time, submit it's PR and pick another one but if the issue is too small or it takes little time to fix, you can pick multiple tickts at a time. </p>
+<h4 id="working-with-a-single-ticket-at-a-time">Working with a single ticket at a time</h4>
+<ul>
+<li><code>ALT-223</code></li>
+<li><code>QQ-54</code></li>
+<li><code>INFLCR-223</code></li>
+</ul>
+<h4 id="working-with-multiple-tickts-at-a-time">Working with multiple tickts at a time</h4>
+<ul>
+<li><code>ALT-223-ALT-224-ALT-305</code></li>
+<li><code>QQ-54-QQ-125-QQ-87</code></li>
+<li><code>INFLCR-223-INFLCR-25</code></li>
+</ul>
+<p>However if you happen to work on an issue which is not on Jira yet convey to your project manager to put that on jira and in the meanwhile you can create a branch like </p>
+<ul>
+<li>chores-AddErrorHandler</li>
+<li>fix-SplashAnimationFix</li>
+<li>feat-AddContinueButtonInWishlistScreen</li>
+</ul>
+<p>If before raising your PR the ticket is created, rename your branch using</p>
+<p><code>git branch -m new-name</code></p>
+<h2 id="commit-message-format">Commit message format</h2>
+<p>We follow a strict specific commit format so that each and every commit messege is well formatted and self explanatory.
+It helps the reviewer or teammate to quickly understand the intenson of the commit and provide feedback accordingly.</p>
+<p>Below are some sample commit message, their structure and explanation of them.</p>
+<p><code>feat(ALT-653) : Adds continue button to navigate to next page</code></p>
+<p><code>fix(INL-345) : Fixes Splash screen animation bug</code></p>
+<p><code>chores(*) : Adds progaurd rules, base project set up</code></p>
+<p>This commit messgae is divided into 3 sections:</p>
+<ol>
+<li>
+<p><code>feat(*) , fix(*), chores(*)</code> : These represents the type of feature or fix your commit will do.</p>
+<ul>
+<li><code>feat(*)</code> : This essentially represents that your commit will add a feature.</li>
+<li><code>fix(*)</code> : This  represents that your commit will fix a bug.</li>
+<li><code>chores(*)</code> : This  represents that your commit is doing some project structure related work.</li>
+</ul>
+</li>
+<li>
+<p><code>ALT-653</code> : This is the ticket number you are working on. If there is no ticket assigned you can replace it with a asterisk <code>*</code>.</p>
+</li>
+<li>
+<p><code>Commit Description</code> : This is a short yet meaningful description of your commit. Below are few points to keep in mind for a descriptive commit message.</p>
+<ul>
+<li>
+<p>It should be authoritative of what that commit is doing. e.g. </p>
+<p><code>Adds the continue buttton on cart checkout page</code></p>
+<p><code>Fixes the splash screen animation bug</code></p>
+</li>
+<li>
+<p>You may not want to include too much technical details in the commit messge. </p>
+</li>
+</ul>
+</li>
+</ol></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
