@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Git - Grappus Android Guidelines</title>
+        <title>Git - Grappus Guidelines</title>
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../css/font-awesome.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
@@ -39,7 +39,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="..">Grappus Android Guidelines</a>
+                    <a class="navbar-brand" href="..">Grappus Guidelines</a>
                 </div>
 
                 <!-- Expanded navigation -->
@@ -47,7 +47,7 @@
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
                             <li >
-                                <a href="..">Home</a>
+                                <a href="./">Home</a>
                             </li>
                             <li class="active">
                                 <a href="./">Git</a>
@@ -64,7 +64,7 @@
                             </a>
                         </li>
                             <li >
-                                <a rel="next" href="..">
+                                <a rel="next" href="./">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
@@ -84,25 +84,25 @@
         <li class="main active"><a href="#git">Git</a></li>
             <li><a href="#cloning-a-repo">Cloning a repo</a></li>
             <li><a href="#connecting-your-web-repository-to-project-management-tool">Connecting your web repository to project management tool.</a></li>
-            <li><a href="#git-alias">Git Alias</a></li>
             <li><a href="#jira-linking">Jira Linking</a></li>
             <li><a href="#branch-naming">Branch Naming</a></li>
             <li><a href="#commit-message-format">Commit message format</a></li>
+            <li><a href="#reviewing-a-pr">Reviewing a PR</a></li>
+            <li><a href="#responding-to-feedback-on-pull-requests">Responding to feedback on Pull Requests</a></li>
+            <li><a href="#best-practices">Best Practices</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
 <h1 id="git">Git</h1>
-<p>We use <a href="https://git-scm.com">git</a> to help us manage changes to source code over time.</p>
-<p>We are assuming that you are famaliar with git to a fair extent.</p>
+<p>We use <a href="https://git-scm.com">git</a> to help us manage changes to source code over time. Follow along to get some insights about our workflow.</p>
+<p>We are assuming that you are famaliar with git to a fair extent. </p>
 <h2 id="cloning-a-repo">Cloning a repo</h2>
-<p>Before cloning a repo make sure you have correct accessrights. </p>
+<p>Before cloning a repo make sure you have correct access rights. </p>
 <h2 id="connecting-your-web-repository-to-project-management-tool">Connecting your web repository to project management tool.</h2>
 <p>As of now we use <a href="https://bitbucket.org">Bitbucket</a> for web-based version control repository hosting service and 
 <a href="https://grappus.atlassian.net">Jira</a> as our project management tool.</p>
 <p>Please contact your project manager to set up workflows which will help in automating issue/ticket tracking process.</p>
-<h2 id="git-alias">Git Alias</h2>
-<p>Git aliases are a powerful workflow tool that create shortcuts to frequently used Git command or a set of Git commands.</p>
 <h2 id="jira-linking">Jira Linking</h2>
 <p>Generally all of your issues are mentioned in the project management tool. This helps in keeping record of the productive time you spend working for the company.</p>
 <h2 id="branch-naming">Branch Naming</h2>
@@ -110,19 +110,17 @@
 <p>Most of time time branched should be created by your issue/ticket number in Jira.</p>
 <p><code>Your jira project prefix  -Dash-  Issue number</code></p>
 <h3 id="here-are-a-few-examples-of-how-the-branch-should-be-named">Here are a few examples of how the branch should be named.</h3>
-<p>Ideally you should work with one ticket at a time, submit it's PR and pick another one but if the issue is too small or it takes little time to fix, you can pick multiple tickts at a time. </p>
+<p>Ideally, you should work with one ticket at a time, submit it's PR and pick another one but if the issue is too small or it takes little time to fix, you can pick multiple tickts at a time. Below are some sample branch names.</p>
 <h4 id="working-with-a-single-ticket-at-a-time">Working with a single ticket at a time</h4>
-<ul>
-<li><code>ALT-223</code></li>
-<li><code>QQ-54</code></li>
-<li><code>INFLCR-223</code></li>
-</ul>
+<pre><code> ALT-223
+ QQ-54
+ INFLCR-223
+</code></pre>
 <h4 id="working-with-multiple-tickts-at-a-time">Working with multiple tickts at a time</h4>
-<ul>
-<li><code>ALT-223-ALT-224-ALT-305</code></li>
-<li><code>QQ-54-QQ-125-QQ-87</code></li>
-<li><code>INFLCR-223-INFLCR-25</code></li>
-</ul>
+<pre><code> ALT-223-ALT-224-ALT-305
+ QQ-54-QQ-125-QQ-87
+ INFLCR-223-INFLCR-25
+</code></pre>
 <p>However if you happen to work on an issue which is not on Jira yet convey to your project manager to put that on jira and in the meanwhile you can create a branch like </p>
 <ul>
 <li>chores-AddErrorHandler</li>
@@ -135,9 +133,9 @@
 <p>We follow a strict specific commit format so that each and every commit messege is well formatted and self explanatory.
 It helps the reviewer or teammate to quickly understand the intenson of the commit and provide feedback accordingly.</p>
 <p>Below are some sample commit message, their structure and explanation of them.</p>
-<p><code>feat(ALT-653) : Adds continue button to navigate to next page</code></p>
-<p><code>fix(INL-345) : Fixes Splash screen animation bug</code></p>
-<p><code>chores(*) : Adds progaurd rules, base project set up</code></p>
+<p><code>feat(ALT-653) : Add continue button to navigate to next page</code></p>
+<p><code>fix(INL-345) : Fix Splash screen animation bug</code></p>
+<p><code>chores(*) : Add progaurd rules, base project set up</code></p>
 <p>This commit messgae is divided into 3 sections:</p>
 <ol>
 <li>
@@ -145,26 +143,45 @@ It helps the reviewer or teammate to quickly understand the intenson of the comm
 <ul>
 <li><code>feat(*)</code> : This essentially represents that your commit will add a feature.</li>
 <li><code>fix(*)</code> : This  represents that your commit will fix a bug.</li>
-<li><code>chores(*)</code> : This  represents that your commit is doing some project structure related work.</li>
+<li><code>chores(*)</code> : This  represents that your commit is doing some project structure related work.doc</li>
+<li><code>docs()</code> : Documentation only changes.</li>
+<li><code>test()</code> : Add missing tests.</li>
 </ul>
 </li>
 <li>
 <p><code>ALT-653</code> : This is the ticket number you are working on. If there is no ticket assigned you can replace it with a asterisk <code>*</code>.</p>
 </li>
-<li>
-<p><code>Commit Description</code> : This is a short yet meaningful description of your commit. Below are few points to keep in mind for a descriptive commit message.</p>
-<ul>
-<li>
-<p>It should be authoritative of what that commit is doing. e.g. </p>
-<p><code>Adds the continue buttton on cart checkout page</code></p>
-<p><code>Fixes the splash screen animation bug</code></p>
-</li>
-<li>
-<p>You may not want to include too much technical details in the commit messge. </p>
-</li>
+<li><code>Commit Description</code> : This is a short yet meaningful description of your commit. Below are few points to keep in mind for a descriptive commit message.<ul>
+<li>{W.I.P}</li>
 </ul>
 </li>
-</ol></div>
+</ol>
+<h2 id="reviewing-a-pr">Reviewing a PR</h2>
+<p>Having proper communication on internet for the benefit of the project is one of the most important aspect of project. Following practices collected from <a href="https://github.com/thoughtbot/guides/tree/master/code-review">Github's blog</a> and <a href="https://github.com/thoughtbot/guides/tree/master/code-review">other sources</a> should be followed.</p>
+<ul>
+<li>Ask, don’t tell. (“What do you think about trying…?” rather than “Don’t do…”).</li>
+<li>If you disagree strongly, consider giving it a few minutes before responding; think before you react.</li>
+<li>Explain your reasons why code should be changed. (Not in line with the style guide? A personal preference?) Offer ways to simplify or improve code.</li>
+<li>Avoid using derogatory terms, like “stupid”, when referring to the work someone has produced.</li>
+<li>Be humble. (“I’m not sure, let’s try…”).</li>
+<li>Avoid hyperbole. (“NEVER do…”).</li>
+<li>Aim to develop professional skills, group knowledge and product quality, through group critique.</li>
+<li>Be aware of negative bias with online communication. (If content is neutral, we assume the tone is negative.) Can you use positive language as opposed to neutral?.</li>
+<li>Use emoji to clarify tone. Compare “:sparkles: :sparkles: Looks good :+1: :sparkles: :sparkles:” to “Looks good.”</li>
+</ul>
+<h2 id="responding-to-feedback-on-pull-requests">Responding to feedback on Pull Requests</h2>
+<ul>
+<li>Don't take it personally. The review is of the code, not you.</li>
+<li>Be grateful for the reviewer's suggestions. ("Good call. I'll make that change.")</li>
+<li>Try to respond to every comment.</li>
+<li>Consider leading with an expression of appreciation, especially when feedback has been mixed.</li>
+</ul>
+<h2 id="best-practices">Best Practices</h2>
+<ul>
+<li>Rebase is preferred to merge as it keeps the tree compact.</li>
+<li>Rebase your working branch before you start working and before you create a pull request.</li>
+<li>Always push your commits at the end of day, so in case of emergency, other team members can pick-up where you left.</li>
+</ul></div>
         </div>
 
         <footer class="col-md-12">
