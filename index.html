@@ -46,8 +46,8 @@
                 <div class="navbar-collapse collapse">
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
-                            <li >
-                                <a href="git/">Home</a>
+                            <li class="active">
+                                <a href=".">Home</a>
                             </li>
                             <li >
                                 <a href="git/">Git</a>
@@ -63,6 +63,16 @@
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
+                            <li class="disabled">
+                                <a rel="next" >
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="git/">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
                     </ul>
                 </div>
             </div>
@@ -71,28 +81,87 @@
         <div class="container">
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="main active"><a href="#home">Home</a></li>
-            <li><a href="#commands">Commands</a></li>
-            <li><a href="#project-layout">Project layout</a></li>
+        <li class="main active"><a href="#grappus-development-guidelines">Grappus Development Guidelines</a></li>
+            <li><a href="#best-practices">Best practices</a></li>
+            <li><a href="#writing-meaningful-names">Writing Meaningful Names:</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
-<h1 id="home">Home</h1>
-<p>For full documentation visit <a href="https://mkdocs.org">mkdocs.org</a>.</p>
-<h2 id="commands">Commands</h2>
-<ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs help</code> - Print this help message.</li>
-</ul>
-<h2 id="project-layout">Project layout</h2>
-<pre><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
-</code></pre></div>
+<h1 id="grappus-development-guidelines">Grappus Development Guidelines</h1>
+<p><strong> The objective of this website is to follow and maintain a uniform convention and rules to follow while developing which is applicable across all teams.</strong></p>
+<h2 id="best-practices">Best practices</h2>
+<h4 id="common-best-practices-that-we-intend-to-follow">Common best practices that we intend to follow:</h4>
+<ol>
+<li>Use Git properly: It helps in maintaining proper workflow and keeps track of changes in source code over time.</li>
+<li>Follow standard naming conventions.</li>
+<li>Use file templates in your IDE to avoid doing the same thing, again and again, such as Live templates in Intellij.</li>
+<li>Follow common practices and IDE and Indentation settings across the team.</li>
+<li>Put comments in ad-hoc logic.</li>
+<li>Follow the latest architecture pattern.</li>
+<li>Use RX where ever possible to save time and write less code.</li>
+<li>Set up CI/CD for ease of integration and distribution of builds.</li>
+</ol>
+<h2 id="writing-meaningful-names">Writing Meaningful Names:</h2>
+<p>The following is an excerpt from Clean Code: A Handbook of Agile Software Craftsmanship (Robert C. Martin).</p>
+<p>Names are everywhere in software. We name our variables, our functions, our arguments, classes, and packages.</p>
+<h3 id="use-intention-revealing-names">Use Intention-Revealing Names:</h3>
+<p>It is easy to say that names should reveal intent. Choosing good names takes time but saves more than it takes. So take care of your names and change them when you find better ones. Everyone who reads your code (including you) will be happier if you do.</p>
+<blockquote>
+<p>You should name a variable using the same care with which you name a first-born child.</p>
+</blockquote>
+<p><strong>The name of a variable, function, or class, should answer all the big questions. It should tell you why it exists, what it does, and how it is used. If a name requires a comment, then the name does not reveal its intent.</strong></p>
+<pre><code>int d; // elapsed time in days
+</code></pre>
+<p>If a name needs a comment to describe itself then it is not a good name.</p>
+<p>The name <code>d</code> reveals nothing. It does not evoke a sense of elapsed time, nor days. We should choose a name that specifies what is being measured and the unit of that measurement:</p>
+<pre><code>int elapsedTimeInDays; 
+int daysSinceCreation; 
+int daysSinceModification; 
+int fileAgeInDays;
+</code></pre>
+<h3 id="add-meaningful-context">Add Meaningful Context:</h3>
+<p>There are a few names which are meaningful in and of themselves—most are not. Instead, you need to place names in context for your reader by enclosing them in well-named classes, functions, or namespaces. </p>
+<p>Imagine that you have variables named firstName, lastName, street, houseNumber, city, state, and zipcode. Taken together it’s pretty clear that they form an address. But what if you just saw the state variable being used alone in a method? Would you automatically infer that it was part of an address?</p>
+<h3 id="writing-functions">Writing Functions:</h3>
+<p><strong>Small!</strong>: The first rule of functions is that they should be small. The second rule of functions is that they should be smaller than that.</p>
+<p><strong>Do One Thing</strong>: Functions should do one thing. They should do it well. They should do it only.</p>
+<p><strong>Function Arguments</strong>: The ideal number of arguments for a function is zero (niladic). Next comes one (monadic), followed closely by two (dyadic). Three arguments (triadic) should be avoided where possible. More than three (polyadic) requires very special justification—and then shouldn’t be used anyway. </p>
+<p>When a function seems to need more than two or three arguments, it is likely that some of those arguments ought to be wrapped into a class of their own.</p>
+<p>Whenever you are doing some conditional operations such as <code>switch</code> statements and inside that, if any operation takes up more than 3 lines, extract that operation into a separate meaning function.</p>
+<h3 id="prefer-exceptions-to-returning-error-codes">Prefer Exceptions to Returning Error Codes:</h3>
+<p>Try to not to return a default value if any condition does not satisfy the pre-known clauses, return an exception instead so that the caller of that function can handle unknown cases accordingly.</p>
+<h3 id="comments">Comments:</h3>
+<blockquote>
+<p>Nothing can be quite so helpful as a well-placed comment. Nothing can clutter up a module more than frivolous dogmatic comments. Nothing can be quite so damaging as an old crufty comment that propagates lies and misinformation.</p>
+</blockquote>
+<p>It is sometimes useful to provide basic information with a comment but most of the time they can be eliminated by the use of good names. For example: </p>
+<pre><code>// Check to see if the employee is eligible for full benefits 
+if ((employee.flags &amp; HOURLY_FLAG) &amp;&amp;
+(employee.age &gt; 65))
+</code></pre>
+<p>Don’t Use a Comment When You Can Use a Function or a Variable. The above is comment is unnecessary and can be easily avoided by extracting to a separate function.</p>
+<pre><code>if (employee.isEligibleForFullBenefits())
+</code></pre>
+<h3 id="todo-comments">TODO Comments:</h3>
+<p>TODOs are jobs that the programmer thinks should be done, but for some reason can’t do at the moment. It might be a reminder to delete a deprecated feature or a plea for someone else to look at a problem. It might be a request for someone else to think of a better name or a reminder to make a change that is dependent on a planned event. Whatever else a TODO might be, it is not an excuse to leave bad code in the system.</p>
+<p>Every TODO comment should include the following things:
+1. Name of the person writing the TODO.
+2. Why is he writing a TODO?
+3. When does he expect to remove it?</p>
+<h3 id="commented-out-code">Commented-Out Code</h3>
+<p>Few practices are as odious as commenting-out code. Don’t do this!</p>
+<pre><code>InputStreamResponse response = new InputStreamResponse();
+response.setBody(formatter.getResultStream(), formatter.getByteCount());
+// InputStream resultsStream = formatter.getResultStream();
+// StreamReader reader = new StreamReader(resultsStream);
+// response.setContent(reader.read(formatter.getByteCount()));
+</code></pre>
+<p>Others who see that commented-out code won’t have the courage to delete it. They’ll think it is there for a reason and is too important to delete. So commented-out code gathers like dregs at the bottom of a bad bottle of wine.</p>
+<h3 id="formatting">Formatting:</h3>
+<p>When people look under the hood, we want them to be impressed with the neatness, consistency, and attention to detail that they perceive. We want them to be struck by the orderliness. We want their eyebrows to rise as they scroll through the modules. We want them to perceive that professionals have been at work.</p>
+<p>You should take care that your code is nicely formatted. You should choose a set of simple rules that govern the format of your code, and then you should consistently apply those rules. If you are working on a team, then the team should agree to a single set of formatting rules and all members should comply. It helps to have an automated tool that can apply those formatting rules for you.</p>
+<p><strong>The Purpose of Formatting</strong>: First of all, let’s be clear. Code formatting is important. It is too important to ignore and it is too important to treat religiously. Code formatting is about communication, and communication is the professional developer’s first order of business.</p></div>
         </div>
 
         <footer class="col-md-12">
@@ -175,5 +244,5 @@ docs/
 
 <!--
 MkDocs version : 1.0.4
-Build Date UTC : 2020-01-27 02:53:37
+Build Date UTC : 2020-02-04 05:16:08
 -->

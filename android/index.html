@@ -47,7 +47,7 @@
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
                             <li >
-                                <a href="../git/">Home</a>
+                                <a href="..">Home</a>
                             </li>
                             <li >
                                 <a href="../git/">Git</a>
@@ -82,202 +82,161 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
         <li class="main active"><a href="#android-guidelines">Android Guidelines</a></li>
-            <li><a href="#setting-up-new-project">Setting up new project</a></li>
-            <li><a href="#setting-up-remote-repository">Setting up remote repository</a></li>
+            <li><a href="#setting-up-a-new-project">Setting up a new project</a></li>
             <li><a href="#creating-git-aliases">Creating Git Aliases</a></li>
             <li><a href="#before-you-start-developing">Before you start developing</a></li>
             <li><a href="#while-developing">While Developing</a></li>
             <li><a href="#raising-a-pr">Raising a PR</a></li>
-            <li><a href="#android-heroes">Android heroes:</a></li>
+            <li><a href="#responding-to-feedback-on-pr">Responding to feedback on PR</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
 <h1 id="android-guidelines">Android Guidelines</h1>
-<h2 id="setting-up-new-project">Setting up new project</h2>
-<p>Setting up a new project takes up a lot effort and forgetting up some edge cases which may lead to some fatal errors
-which can lead to some serious issues to be handled later.</p>
+<h2 id="setting-up-a-new-project">Setting up a new project</h2>
+<h3 id="server-side">Server Side</h3>
+<p>While following every step mentioned in <a href="../git/">git here</a>, there is a small additional step you need to follow:</p>
+<p>In bitbucket go to <code>Settings-&gt;PULL REQUESTS-&gt;Default description</code> and paste the following content:</p>
+<pre><code>    ## Description
+
+    ### Why was this change necessary?
+
+    [text here]
+
+    ### How does it address the problem?
+
+    [text here]
+
+    ### Are there any side effects?
+
+    [text here]
+
+    ### Do you want any specific feedback?
+
+    [text here]
+
+    ### Do you have resources that will help the reviewer?
+
+    [MP-](https://grappus.atlassian.net/browse/MP-)
+
+    ### Zeplin screen design links?
+
+    [link here]
+
+    ### Did you run `./gradlew spotlessApply; ./gradlew testDebugUnitTestCoverage;` locally?
+
+    [yes/no]
+</code></pre>
+<h3 id="client-side">Client Side</h3>
+<p>Setting up a new project takes up a lot of effort and forgetting up some edge cases is pretty normal which may lead to some fatal errors which can lead to some serious issues to be handled later.</p>
 <p>We have done this job for you. Follow along to see the process.</p>
 <ol>
 <li>Clone our base project from <a href="https://github.com/Grappus/Android_MVI_Base">here</a>. </li>
 <li>
-<p>Change the required package name. While working with multiple modules few things to keep in mind with the modules package 
-name. For example take <code>com.android</code> as the base package name:</p>
-<p>(i) Package name of <code>app module</code> should be <code>com.android</code>.</p>
+<p>Change the required package name. While working with multiple modules few things to keep in mind with the modules package name. For example, take <code>com.android</code> as the base package name:</p>
+<p>(i) The package name of the <code>app module</code> should be <code>com.android</code>.</p>
 <p>(ii) Package name of <code>api module</code> should be <code>com.android.api</code>.</p>
 <p>(iii) Package name of <code>core module</code> should be <code>com.android.core</code>.</p>
 <p>(iv) Package name of <code>logic module</code> should be <code>com.android.logic</code>.</p>
+<p>(v) Ensure that application id in <code>manifest.xml</code> and <code>build.gradle</code> is the same.</p>
 <p>Naming the packages in this format helps in running test cases with <a href="https://www.eclemma.org/jacoco/">Jacoco</a>.</p>
 </li>
 <li>
-<p>Change the api response structure according to your needs [link here] and ammend it's test class accrrdingly.</p>
+<p>Change the API response structure according to your needs in <a href="https://github.com/Grappus/Android_MVI_Base/blob/develop/api/src/main/java/com/grappus/android/api/entities/ApiResponse.kt">this file</a> and amend it's test class accordingly in your local project.</p>
 </li>
 <li>Format the code by running <code>./gradlew spotlessApply</code> command and run tests by running <code>./gradlew testDebugUnitTestCoverage</code>.</li>
+<li>If the above command fails, ensure that you are on <code>java version 1.8</code> and if not please upgrade or degrade your java version. Degrading java version can be done by running <code>export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)</code> in terminal. More details <a href="https://stackoverflow.com/questions/46513639/how-to-downgrade-java-from-9-to-8-on-a-macos-eclipse-is-not-running-with-java-9/48422257">here</a>. </li>
 <li>Delete the <code>.git</code> folder in your project's root directory.</li>
-<li>Connect your local repo to remote source.</li>
+<li>Rename your root project name.</li>
+<li>Connect your local repo to a remote source.</li>
 </ol>
-<p>if all the above points run successfully then you are ready to roll.</p>
-<h2 id="setting-up-remote-repository">Setting up remote repository</h2>
-<p>If not already done</p>
-<ol>
-<li>Create a new project in Bitbucket.</li>
-<li>Create a new repository in the newly created project.</li>
-<li>Create a new branch named <code>develop</code>.</li>
-<li>
-<p>Navigate to <code>Settings -&gt; Workflow -&gt; Branch permissions</code>.</p>
-<p>(i) Create a branch permission for <code>develop</code> and <code>master</code>.</p>
-<p>(ii) Give branch access to specific people.</p>
-<p>(iii)Uncheck the  <code>Allow rewriting branch history</code> and <code>Allow deleting this branch</code> checkbox.</p>
-</li>
-<li>
-<p>Connect your local repo to remote source.</p>
-</li>
-</ol>
-<p><code>develop</code> should always be latest stable branch where all development PR's would be sent to.</p>
-<p><code>master</code> stable branch and should only be used for client and production releases.</p>
-<h3 id="creating-a-pr-template">Creating a PR template</h3>
-<p>PR template helps us to remind of some things which are essential things for the project's sanity to be maintained. While working with
-the team it is essential that we all follow some basic rules and provide useful information to the reviewer.</p>
-<p>If you are an admin of the repository</p>
-<ol>
-<li>Go to settings.</li>
-<li>
-<p>Under the <code>PULL REQUESTS</code> heading, click <code>Default description</code> and paste the following content .</p>
-<pre><code> ## Description
-
- ### Why was this change necessary?
-
- [text here]
-
- ### How does it address the problem?
-
- [text here]
-
- ### Are there any side effects?
-
- [text here]
-
- ### Do you want any specific feedback?
-
- [text here]
-
- ### Do you have resources that will help the reviewer?
-
- [MP-](https://messengerpro.atlassian.net/browse/MP-)
-
- ### Zeplin screen design links?
-
- [link here]
-
- ### Did you run `./gradlew spotlessApply; ./gradlew testDebugUnitTestCoverage;` locally?
-
- [yes/no]
-</code></pre>
-</li>
-<li>
-<p>Change the JIRA tickts prefix according to you and click save.</p>
-</li>
-</ol>
+<p>if all the above points run successfully and your build is successful then you are ready to roll.</p>
 <h2 id="creating-git-aliases">Creating Git Aliases</h2>
 <p>Aliases are used to create shorter commands that map to longer commands. Here are a few handy git aliases you can make to avoid
 copy and pasting a command again and again.</p>
 <ol>
-<li>pr check alias here</li>
-<li>Another alias here.</li>
+<li><code>alias prcheck="./gradlew spotlessApply; ./gradlew spotlessCheck testDebugUnitTestCoverage;sapply"</code>: Add this to your bash profile and you can run <code>prcheck</code> in your directory to assert things are fine before submitting a PR.</li>
 </ol>
 <h2 id="before-you-start-developing">Before you start developing</h2>
-<h4 id="set-up-file-template-in-intellij">Set up File template in Intellij</h4>
-<p>We have made a Android studio template to create files required for a fragment.</p>
+<h3 id="set-up-file-template-in-intellij">Set up File template in Intellij</h3>
+<p>We have made an Android studio template to create files required for a fragment and it's related files.</p>
 <ol>
-<li>Download the File template from <a href="https://www.google.com">here</a> and follow the instructions written in <code>Readme.txt</code>.</li>
-<li>Navigate to Android Studio and go to <code>File-&gt; Import Settings...</code> and select the settings.zip inside the newly downloaded file template.</li>
-<li>After completing the above processes restart Androids studio and you should see file template <a href="">link here</a>.</li>
+<li>Download the File template from <a href="https://github.com/Grappus/Android_MVI_Base/blob/develop/MVIFragmentTemplate.zip">here</a> and follow the instructions written in <code>Readme.txt</code> inside the newly extracted folder.</li>
+<li>Navigate to Android Studio and go to <code>File-&gt; Import Settings...</code> and select the settings.zip inside the newly-downloaded file template.</li>
+<li>After completing the above processes restart Androids studio and you should see file template as seen in the image in the above-downloaded folder.</li>
 </ol>
 <h2 id="while-developing">While Developing</h2>
 <p>Few things to remember while developing so that we all can be on the same page.</p>
-<ol>
-<li>
-<p>Nomenclature : </p>
-<p>Typacilly each fragment contains 5 Files.</p>
-<pre><code>* Fragment : The part where UI events are handled.
-* FragmentBindingModel : The part where UI events processing is done and formatted details 
-                           are sent to the fragment.
-* FragmentViewModel : Here the events are processed. It contains all the required data to
-                           mantain the state of the fragment.
-* FragmentHandler : It is a interface where we declare the click listeners of UI events.
-* FragmentLayout : It contains the UI design code.
-</code></pre>
-</li>
-<li>
-<p>Naming convention of all files should be as described above just replace the above word Fragment with your desired name.</p>
-</li>
-<li>
-<p>Write the test cases of logic module religiously. </p>
-</li>
-<li>
-<p>Write comments where ever you are performing some ad-hoc logic calculation. Do not use random numbers in that method, give them a proper variable name.</p>
-</li>
-</ol>
-<h4 id="use-intention-revealing-names">Use Intention-Revealing Names</h4>
-<p>The following is an excerpt from Clean Code: A Handbook of Agile Software Craftsmanship (Robert C. Martin).</p>
-<p>It is easy to say that names should reveal intent. What we want to impress upon you is that we are serious about this. Choosing good names takes time but saves more than it takes. So take care with your names and change them when you find better ones. Everyone who reads your code (including you) will be happier if you do.</p>
-<p>The name of a variable, function, or class, should answer all the big questions. It should tell you why it exists, what it does, and 
-how it is used. If a name requires a com- ment, then the name does not reveal its intent.</p>
-<pre><code>int d; // elapsed time in days
-</code></pre>
-<p>If a name needs a comment to describe itself then it is not a good name.</p>
-<p>The name d reveals nothing. It does not evoke a sense of elapsed time, nor of days. We should choose a name that specifies what is being measured and the unit of that measurement:</p>
-<pre><code>int elapsedTimeInDays; 
-int daysSinceCreation; 
-int daysSinceModification; 
-int fileAgeInDays;
-</code></pre>
-<h2 id="raising-a-pr">Raising a PR</h2>
-<p>Few important things to remember while raising your PR to be merged so that we all can benifit from it and it's important to follow some standard conventions while creating pull requests:</p>
-<h3 id="before-creating-a-pull-request">Before creating a pull request</h3>
-<p>It is imperative before creating a new Pull Request to <a href="https://github.com/edx/edx-platform/wiki/How-to-Rebase-a-Pull-Request#perform-a-rebase">rebase</a>:</p>
+<h3 id="architecture">Architecture:</h3>
+<p>We are following a mixture of MVI and MVVM architecture in this project with <a href="https://kotlinlang.org">kotlin</a> as the primary language for development. In this project, we heavily use <a href="https://github.com/ReactiveX/RxJava">RxJava</a>, <a href="https://github.com/ReactiveX/RxKotlin">RxKotlin</a> and <a href="https://developer.android.com/topic/libraries/architecture/livedata">Live Data</a> for managing asynchronous call in API and database. We manage our dependencies using <a href="https://github.com/google/dagger">dagger</a>, code test coverage is maintained using <a href="https://www.eclemma.org/jacoco/">Jacoco</a> and mocking of objects including API response is done using <a href="https://site.mockito.org">mockito</a>.</p>
+<p>We strictly follow the Single responsibility principle and therefore this project is divided into 6 modules.</p>
 <ul>
 <li>
-<p>Make sure that the branch that you are actually using on your local machine is the branch you want to rebase. To do so you can switch it with a GUI tool or in the terminal:</p>
-<pre><code>$ git checkout my-branch
-</code></pre>
+<p><strong><a href="https://github.com/Grappus/Android_MVI_Base/tree/develop/core">core</a></strong>: This module contains all the view model base classes, models for app views and Transport classes for transporting server entities to app models.</p>
 </li>
 <li>
-<p>Then run the rebase command to rebase your branch base on the develop branch (our default branch):</p>
-<pre><code>$ git rebase origin develop
-</code></pre>
+<p><strong><a href="https://github.com/Grappus/Android_MVI_Base/tree/develop/logic">logic</a></strong>: Logic contains all the view model implementations and App logic. Dagger modules are also defined here only.</p>
 </li>
 <li>
-<p>If merge conflicts occur resolve them and then:</p>
-<pre><code>$ git rebase --continue
-</code></pre>
+<p><strong><a href="https://github.com/Grappus/Android_MVI_Base/tree/develop/app">app</a></strong>: App is the view layer and contains all the views implementation. It also contains dagger components.</p>
 </li>
 <li>
-<p>Push the rebase:</p>
-<pre><code>$ git push -f
-</code></pre>
+<p><strong><a href="https://github.com/Grappus/Android_MVI_Base/tree/develop/api">api</a></strong>: Api layer contains the network related implementations.</p>
+</li>
+<li>
+<p><strong><a href="https://github.com/Grappus/Android_MVI_Base/tree/develop/buildSrc">buildSrc</a></strong> It manages external dependencies for the whole project.</p>
+</li>
+<li>
+<p><strong><a href="">local-resources</a></strong> This module is used to hold static JSON responses which can be used for local build-types and testing purposes.</p>
 </li>
 </ul>
-<hr />
+<h3 id="nomenclature">Nomenclature :</h3>
+<pre><code>Typacilly each fragment contains 5 Files.
+
+    * Fragment: The part where UI events are handled.
+    * FragmentBindingModel: The part where UI events processing is done and formatted details 
+                               are sent to the fragment.
+    * FragmentViewModel: Here the events are processed. It contains all the required data to
+                               maintain the state of the fragment.
+    * FragmentHandler: It is an interface where we declare the click listeners of UI events.
+    * FragmentLayout: It contains the UI design code.
+</code></pre>
+<p>The naming convention of all files should be as described above just replace the above word Fragment with your desired name.</p>
+<h3 id="testcases">Testcases:</h3>
+<p>Write the test cases of logic module religiously by covering each ViewEvent including api and database calls by asserting their expected and actual view state update before and after the operation. We strictly maintain a minimum of 70% code coverage in our test cases which include branch testing (there should be an if for every else) and instructions testing. </p>
+<p>Any PR which does not satisfy the minimum test coverage criteria shall not be merged. To see your current coverage:</p>
 <ol>
-<li>Your PR should be small.</li>
-<li>Make sure that the branch that you are actually using on your local machine is the branch you want to rebase. To do so you can switch it with a GUI tool or in the terminal:
-<code>$ git rebase origin/develop</code>.</li>
-<li>If you have implemented anythingnew, please mention the relevent links to it.</li>
+<li>Run <code>./gradlew testDebugUnitTestCoverage</code> in your terminal.</li>
+<li>Navigate to the logic module in the Project view in AS.</li>
+<li>Go to <code>build-&gt;reports-&gt;jacaco-&gt;testDebugUnitTestCoverage-&gt;html</code> and open <code>index.html</code> in your browser to see your test code coverage to every file in logic module.</li>
+</ol>
+<h3 id="extension-functionsproperties">Extension functions/properties</h3>
+<p>Kotlin provides the ability to extend a class with new functionality without having to inherit from the class, this is done via special declarations called extensions. We encourage you to write extension functions, primarily in the logic module and writing its test cases vigorously. <a href="https://github.com/Grappus/Android_MVI_Base/blob/develop/logic/src/main/java/com/grappus/android/logic/extensions/DatatypeExtensions.kt">Here</a> is a small implementation of Datatype Extensions for your reference and it's test cases are written <a href="https://github.com/Grappus/Android_MVI_Base/blob/develop/logic/src/test/java/com/grappus/android/logic/extensions/DatatypeExtensionsTest.kt">here</a>.</p>
+<h3 id="writing-comments">Writing comments</h3>
+<p>No need to clutter your code by writing comments for every method but do not forget to write comments whenever you are performing some ad-hoc logic calculation. Do not use random numbers in that method, give them a proper variable name.</p>
+<h3 id="use-vector-assets">Use Vector Assets</h3>
+<p>Android Studio includes a tool called Vector Asset Studio that helps you add material icons and import Scalable Vector Graphic (SVG) and Adobe Photoshop Document (PSD) files into your project as vector drawable resources. Using vector drawables instead of bitmaps reduces the size of your APK because the same file can be resized for different screen densities without loss of image quality. For older versions of Android that don't support vector drawables, Vector Asset Studio can, at build time, turn your vector drawables into different bitmap sizes for each screen density. You can read more about it <a href="https://developer.android.com/studio/write/vector-asset-studio">here</a>.</p>
+<h3 id="making-reusable-layouts">Making reusable layouts:</h3>
+<p>Make the layout's reusable by using <code>&lt;include&gt;</code> tag in the layout and pass data to them using data binding.</p>
+<h3 id="avoid-hard-coding">Avoid hard coding:</h3>
+<p>Do not hard code strings in the project. Use them via <code>strings.xml</code> to ease the process of translation in different languages.</p>
+<h3 id="using-kotlin-only-features">Using Kotlin only features:</h3>
+<p>We encourage you to use kotlin only features such as <a href="https://kotlinlang.org/docs/reference/sealed-classes.html">sealed classes</a>, extension function, Objects, etc.</p>
+<p>As said above we heavily use <a href="https://kotlinlang.org/docs/reference/scope-functions.html">Scope Functions</a> to write clutter-free code and avoid writing the same thing again and again. Please refer to the above link to read more about it.</p>
+<h2 id="raising-a-pr">Raising a PR</h2>
+<ol>
+<li>Follow the steps as described in <a href="../git/#raising-a-pr">git section</a>.</li>
+<li>Run <code>prcheck</code> alias in the terminal.</li>
 <li>If you have made changes only in a single module, squash all your commits into 1 commit.</li>
-<li>
-<p>If you have made changes in more than 1 module, please divide your PR into 3 commits i.e data, logic and UI. Following is an example commit message where each commit contains it's relevent files.</p>
-<pre><code>feat(ALT-33) : Adds sign in via OTP screen (data).
-feat(ALT-33) : Adds sign in via OTP screen (logic).
-feat(ALT-33) : Adds sign in via OTP screen (UI).
+<li>If you have made changes in more than 1 module, please divide your PR into 3 commits i.e data, logic and UI. Following is an example commit message where each commit contains its relevant files.<pre><code>feat(ALT-33): Adds sign in via OTP screen (data).
+feat(ALT-33): Adds sign in via OTP screen (logic).
+feat(ALT-33): Adds sign in via OTP screen (UI).
 </code></pre>
 </li>
-<li>
-<p>Fill the description form and hit the <code>Create PR</code> button.</p>
-</li>
 </ol>
-<h2 id="android-heroes">Android heroes:</h2>
-<p>Meet our awesome Android team </p></div>
+<h2 id="responding-to-feedback-on-pr">Responding to feedback on PR</h2>
+<p>The changes which you have done in your code as suggested in PR comments should be committed separately in a separate commit with the commit message as </p>
+<p><code>fix(*): PR suggestions</code></p></div>
         </div>
 
         <footer class="col-md-12">

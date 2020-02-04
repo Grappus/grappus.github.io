@@ -47,7 +47,7 @@
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
                             <li >
-                                <a href="./">Home</a>
+                                <a href="..">Home</a>
                             </li>
                             <li class="active">
                                 <a href="./">Git</a>
@@ -64,7 +64,7 @@
                             </a>
                         </li>
                             <li >
-                                <a rel="next" href="./">
+                                <a rel="next" href="..">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
@@ -82,11 +82,11 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
         <li class="main active"><a href="#git">Git</a></li>
-            <li><a href="#cloning-a-repo">Cloning a repo</a></li>
-            <li><a href="#connecting-your-web-repository-to-project-management-tool">Connecting your web repository to project management tool.</a></li>
-            <li><a href="#jira-linking">Jira Linking</a></li>
+            <li><a href="#setting-up-a-new-project">Setting up a new project</a></li>
+            <li><a href="#connecting-your-web-repository-to-the-project-management-tool">Connecting your web repository to the project management tool.</a></li>
             <li><a href="#branch-naming">Branch Naming</a></li>
             <li><a href="#commit-message-format">Commit message format</a></li>
+            <li><a href="#raising-a-pr">Raising a PR</a></li>
             <li><a href="#reviewing-a-pr">Reviewing a PR</a></li>
             <li><a href="#responding-to-feedback-on-pull-requests">Responding to feedback on Pull Requests</a></li>
             <li><a href="#best-practices">Best Practices</a></li>
@@ -95,69 +95,220 @@
                 <div class="col-md-9" role="main">
 
 <h1 id="git">Git</h1>
-<p>We use <a href="https://git-scm.com">git</a> to help us manage changes to source code over time. Follow along to get some insights about our workflow.</p>
-<p>We are assuming that you are famaliar with git to a fair extent. </p>
-<h2 id="cloning-a-repo">Cloning a repo</h2>
-<p>Before cloning a repo make sure you have correct access rights. </p>
-<h2 id="connecting-your-web-repository-to-project-management-tool">Connecting your web repository to project management tool.</h2>
-<p>As of now we use <a href="https://bitbucket.org">Bitbucket</a> for web-based version control repository hosting service and 
-<a href="https://grappus.atlassian.net">Jira</a> as our project management tool.</p>
-<p>Please contact your project manager to set up workflows which will help in automating issue/ticket tracking process.</p>
-<h2 id="jira-linking">Jira Linking</h2>
-<p>Generally all of your issues are mentioned in the project management tool. This helps in keeping record of the productive time you spend working for the company.</p>
+<p>We use <a href="https://git-scm.com">git</a> to help us manage changes to our source code over time. Follow along to get some insights about our workflow.</p>
+<p>If you are new to git, please read the following blogs to get started:</p>
+<ul>
+<li><a href="http://rogerdudler.github.io/git-guide/">Git basics</a></li>
+<li><a href="https://try.github.io">Try Git</a></li>
+<li><a href="https://github.com/agis/git-style-guide#git-style-guide">Style Guide</a></li>
+<li><a href="https://www.atlassian.com/git/tutorials/merging-vs-rebasing">Merging vs. Rebasing</a></li>
+<li><a href="https://github.com/edx/edx-platform/wiki/How-to-Rebase-a-Pull-Request">Rebasing a Pull Request</a></li>
+</ul>
+<h2 id="setting-up-a-new-project">Setting up a new project</h2>
+<h3 id="setting-up-a-remote-repository">Setting up a remote repository</h3>
+<p>We use <a href="https://bitbucket.org">Bitbucket</a> for web-based version control repository hosting service, so if not already done</p>
+<ol>
+<li>Create a new project in Bitbucket.</li>
+<li>Create a new repository in the newly created project.</li>
+<li>Create a new branch named <code>develop</code>.</li>
+<li>
+<p>Navigate to <code>Settings -&gt; Workflow -&gt; Branch permissions</code>.</p>
+<p>(i) Create branch permission for branch <code>develop</code> and <code>master</code>.</p>
+<p>(ii)Uncheck the  <code>Allow rewriting branch history</code> and <code>Allow deleting this branch</code> checkbox for both the branches.</p>
+<p>(iii) Onboard your team.</p>
+</li>
+</ol>
+<p><code>master</code> stable branch and should only be used for client and production releases.</p>
+<p><code>develop</code> should always be the latest stable branch where all development PR's would be sent to.</p>
+<h3 id="creating-a-pr-template">Creating a PR template</h3>
+<p>PR template helps us to remind of some things which are essential for the project's sanity to be maintained. While working with
+the team we all must follow some basic rules and provide useful information to the reviewer.</p>
+<p>If you are an admin of the repository</p>
+<ol>
+<li>Go to <code>Settings</code>.</li>
+<li>
+<p>Under the <code>PULL REQUESTS</code> heading, click <code>Default description</code> and paste the following content.</p>
+<pre><code> ## Description
+
+ ### Why was this change necessary?
+
+ [text here]
+
+ ### How does it address the problem?
+
+ [text here]
+
+ ### Are there any side effects?
+
+ [text here]
+
+ ### Do you want any specific feedback?
+
+ [text here]
+
+ ### Do you have resources that will help the reviewer?
+
+ [MP-](https://messengerpro.atlassian.net/browse/MP-)
+
+ ### Zeplin screen design links?
+
+ [link here]
+</code></pre>
+</li>
+<li>
+<p>Change the Jira tickets prefix according to your Jira project and click save.</p>
+</li>
+<li>If you have already created your project locally then modify it's <code>.gitignore</code> <a href="https://www.atlassian.com/git/tutorials/saving-changes/gitignore">file</a> according to you and <a href="https://help.github.com/en/github/importing-your-projects-to-github/adding-an-existing-project-to-github-using-the-command-line">connect your local project to remote repository</a> else <a href="https://confluence.atlassian.com/bitbucket/clone-a-repository-223217891.html">clone the project to your local machine</a>.</li>
+</ol>
+<h2 id="connecting-your-web-repository-to-the-project-management-tool">Connecting your web repository to the project management tool.</h2>
+<p>We use <a href="https://grappus.atlassian.net">Jira</a> as our project management tool.</p>
+<p>Please contact your project manager to <a href="https://support.atlassian.com/jira-core-cloud/docs/build-the-workflow-you-need/">set up workflows</a> which will help in automating issue/ticket tracking process.</p>
+<p><strong><em>Jira Linking</em></strong></p>
+<p>Generally, all of your tasks are mentioned in the project management tool. This helps in keeping a record of the productive time you spend working for the company.</p>
 <h2 id="branch-naming">Branch Naming</h2>
 <p>Git branches are effectively a pointer to a snapshot of your changes. When you want to add a new feature or fix a bug—no matter how big or how small—you spawn a new branch to encapsulate your changes. If you have not created a new branch till yet go ahead and create one.</p>
-<p>Most of time time branched should be created by your issue/ticket number in Jira.</p>
-<p><code>Your jira project prefix  -Dash-  Issue number</code></p>
+<p>Type the following command to create a new branch </p>
+<p><code>git checkout -b {$new_branch _name}</code></p>
+<p>Most of the time branched should be created by your issue/ticket number in Jira.</p>
+<p><code>{$your_jira_project_prefix}  {$dash}  {$issue_number}</code></p>
 <h3 id="here-are-a-few-examples-of-how-the-branch-should-be-named">Here are a few examples of how the branch should be named.</h3>
-<p>Ideally, you should work with one ticket at a time, submit it's PR and pick another one but if the issue is too small or it takes little time to fix, you can pick multiple tickts at a time. Below are some sample branch names.</p>
+<p>Ideally, you should work with one ticket at a time, raise its PR to <code>develop</code> and pick another one but if the issue is too small or it takes little time and effort to fix, you can pick multiple tickets at a time. Below are some sample branch names.</p>
 <h4 id="working-with-a-single-ticket-at-a-time">Working with a single ticket at a time</h4>
 <pre><code> ALT-223
  QQ-54
  INFLCR-223
 </code></pre>
-<h4 id="working-with-multiple-tickts-at-a-time">Working with multiple tickts at a time</h4>
+<h4 id="working-with-multiple-tickets-at-a-time">Working with multiple tickets at a time</h4>
 <pre><code> ALT-223-ALT-224-ALT-305
  QQ-54-QQ-125-QQ-87
  INFLCR-223-INFLCR-25
 </code></pre>
-<p>However if you happen to work on an issue which is not on Jira yet convey to your project manager to put that on jira and in the meanwhile you can create a branch like </p>
+<p>However, if you happen to work on an issue which is not on Jira yet, convey this to your project manager to put that on Jira and in the meanwhile, you can create a branch like </p>
 <ul>
 <li>chores-AddErrorHandler</li>
 <li>fix-SplashAnimationFix</li>
 <li>feat-AddContinueButtonInWishlistScreen</li>
 </ul>
 <p>If before raising your PR the ticket is created, rename your branch using</p>
-<p><code>git branch -m new-name</code></p>
+<p><code>git branch -m {$new-name}</code></p>
 <h2 id="commit-message-format">Commit message format</h2>
-<p>We follow a strict specific commit format so that each and every commit messege is well formatted and self explanatory.
-It helps the reviewer or teammate to quickly understand the intenson of the commit and provide feedback accordingly.</p>
-<p>Below are some sample commit message, their structure and explanation of them.</p>
-<p><code>feat(ALT-653) : Add continue button to navigate to next page</code></p>
-<p><code>fix(INL-345) : Fix Splash screen animation bug</code></p>
+<p>We follow a strict specific commit format so that every commit message is well-formatted and self-explanatory.
+It helps the reviewer or teammate to quickly understand the intention of the commit and provide feedback accordingly.</p>
+<p>Below are some sample commit message, their structure, and explanation of them.</p>
+<p><code>feat(ALT-653): Add continue button in the login screen to navigate to next page</code></p>
+<p><code>fix(INL-345): Fix Splash screen animation bug</code></p>
 <p><code>chores(*) : Add progaurd rules, base project set up</code></p>
-<p>This commit messgae is divided into 3 sections:</p>
+<p>This commit message is divided into 4 sections:</p>
+<pre><code>&lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;
+&lt;BLANK LINE&gt;
+&lt;body&gt;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>feat()</td>
+<td align="left">This essentially represents that your commit will add a feature.</td>
+</tr>
+<tr>
+<td>fix()</td>
+<td align="left">This represents that your commit will fix a bug.</td>
+</tr>
+<tr>
+<td>chores()</td>
+<td align="left">This represents that your commit is doing some project structure related work.</td>
+</tr>
+<tr>
+<td>docs()</td>
+<td align="left">Documentation only changes.</td>
+</tr>
+<tr>
+<td>test()</td>
+<td align="left">Add missing tests.</td>
+</tr>
+<tr>
+<td>refactor()</td>
+<td align="left">A code change that neither fixes a bug or adds a feature.</td>
+</tr>
+<tr>
+<td>perf()</td>
+<td align="left">A code change that improves performance.</td>
+</tr>
+</tbody>
+</table>
 <ol>
 <li>
-<p><code>feat(*) , fix(*), chores(*)</code> : These represents the type of feature or fix your commit will do.</p>
+<p><code>Type</code>: These represent the type of feature or fix your commit will do.</p>
+</li>
+<li>
+<p><code>Scope</code>: This could be anything defining the place of change a commit. Usually, it can be the ticket number you are working on. If there is no ticket assigned you can replace it with an asterisk <code>*</code>.</p>
+</li>
+<li>
+<p><code>Subject</code>: This is a short yet meaningful description of your commit. Below are few points to keep in mind for a descriptive commit message.</p>
 <ul>
-<li><code>feat(*)</code> : This essentially represents that your commit will add a feature.</li>
-<li><code>fix(*)</code> : This  represents that your commit will fix a bug.</li>
-<li><code>chores(*)</code> : This  represents that your commit is doing some project structure related work.doc</li>
-<li><code>docs()</code> : Documentation only changes.</li>
-<li><code>test()</code> : Add missing tests.</li>
+<li>Capitalize the first letter.</li>
+<li>Limit the subject line to 50 characters.</li>
+<li>Do not end the subject line with a period(.).</li>
+<li>Use the imperative mood in the subject line. For example: <code>Fix Splash animation bug</code> not <code>Fixes Splash animation bug</code> nor <code>Fixed Splash animation bug</code>.</li>
 </ul>
 </li>
 <li>
-<p><code>ALT-653</code> : This is the ticket number you are working on. If there is no ticket assigned you can replace it with a asterisk <code>*</code>.</p>
-</li>
-<li><code>Commit Description</code> : This is a short yet meaningful description of your commit. Below are few points to keep in mind for a descriptive commit message.<ul>
-<li>{W.I.P}</li>
-</ul>
+<p><code>Body</code>: Body in a commit message is used to describe changes in your commit in a more descriptive way. Although it is not always compulsory to write  <code>body</code> in every commit message but it is a good practice to write it to explain your changes. </p>
 </li>
 </ol>
+<p>Here is how you can write a commit message body.</p>
+<ol>
+<li>Write <code>git commit</code> command without any flags.</li>
+<li>It will open your pre-configured editor.</li>
+<li>If the editor is vim then enter insert mode by pressing <code>i</code> or <code>insert key</code>.</li>
+<li>Enter your precise commit message in the first line.</li>
+<li>Leave a blank line.</li>
+<li>Enter the description body of your changes.</li>
+<li>Press <code>Esc</code> and then press <code>:wq</code> to save and quit the editor.</li>
+</ol>
+<h2 id="raising-a-pr">Raising a PR</h2>
+<p>Few important things to remember while raising your PR to be merged so that we all can benefit from it and it's important to follow some standard conventions while creating pull requests:</p>
+<h3 id="before-creating-a-pull-request">Before creating a pull request</h3>
+<p>We follow the concept of <a href="https://git-scm.com/docs/git-rebase">rebase</a> to maintain a linear project history of git tree and clean branching model, so it is important to squash your commits and rebase with develop branch.</p>
+<p>Do not hesitate to push your work regularly to the cloud, but after completing your task combine your commits into minimum meaningful commits. </p>
+<blockquote>
+<p>Note: Do not try to squash the commits of <code>develop</code>, <code>master</code> or whichever branch on which multiple people are working on. Their commit history and integrity should be maintained.</p>
+</blockquote>
+<p>Here are a few steps you can follow to achieve the same.</p>
+<ol>
+<li>Commit all your work.</li>
+<li>Count the number of commits you want to squash using <code>git log --oneline</code>.</li>
+<li>Start an interactive rebase session by typing <code>git rebase -i HEAD~{$number_of_commits_to_squash}</code> in terminal.</li>
+<li>In the window pick or squash the commits using <code>p</code> or <code>s</code> after entering insert mode.</li>
+<li>If the conflicts occur resolve them using <a href="https://git-scm.com/docs/git-mergetool">git mergetool</a>.</li>
+<li>After resolving the conflicts add them using <code>git add .</code> and continue rebasing them using <code>git rebase --continue</code>.</li>
+</ol>
+<p>Read the above-described process in detail <a href="https://www.internalpointers.com/post/squash-commits-into-one-git">here</a>.</p>
+<p><strong>Pro-tip</strong>: You can also achieve the above same process using <code>git reset HEAD~{$number_of_commits_to_squash}</code>. It avoids conflicts by simply un-committing your work and then you can simply combine your work in a single commit.
+<code>git pull --rebase origin develop</code></p>
+<p><strong>Rebase your branch from develop</strong></p>
+<ol>
+<li>Checkout to develop branch.</li>
+<li>Update your local branch using <code>git pull origin develop</code>.</li>
+<li>Checkout to your branch and run <code>git rebase develop</code>.</li>
+<li>Resolve your conflicts if any using the above-described process.</li>
+<li>Force push your changes using <code>git push -f origin {$branch_name}</code></li>
+</ol>
+<h3 id="follow-and-maintain-below-points-in-your-pr-for-it-to-be-reviewed">Follow and maintain below points in your PR for it to be reviewed</h3>
+<ol>
+<li>Your PR should be small and specific to a unit or granular task.</li>
+<li>If you have implemented anything new, please mention the relevant links to it.</li>
+<li>The code contained within will meet the best practices set by the team wherever possible.</li>
+<li>Write your test cases vigorously.</li>
+<li>Fill the description form, add all your working teammates as reviewers so that every person is aware of changes in the code base and hit the <code>Create PR</code> button.</li>
+</ol>
 <h2 id="reviewing-a-pr">Reviewing a PR</h2>
-<p>Having proper communication on internet for the benefit of the project is one of the most important aspect of project. Following practices collected from <a href="https://github.com/thoughtbot/guides/tree/master/code-review">Github's blog</a> and <a href="https://github.com/thoughtbot/guides/tree/master/code-review">other sources</a> should be followed.</p>
+<p>Having proper communication on the internet for the benefit of the project is one of the most important aspects of the project. Following practices collected from <a href="https://github.com/thoughtbot/guides/tree/master/code-review">Github's blog</a> and <a href="https://github.com/thoughtbot/guides/tree/master/code-review">other sources</a> should be followed.</p>
 <ul>
 <li>Ask, don’t tell. (“What do you think about trying…?” rather than “Don’t do…”).</li>
 <li>If you disagree strongly, consider giving it a few minutes before responding; think before you react.</li>
@@ -165,8 +316,8 @@ It helps the reviewer or teammate to quickly understand the intenson of the comm
 <li>Avoid using derogatory terms, like “stupid”, when referring to the work someone has produced.</li>
 <li>Be humble. (“I’m not sure, let’s try…”).</li>
 <li>Avoid hyperbole. (“NEVER do…”).</li>
-<li>Aim to develop professional skills, group knowledge and product quality, through group critique.</li>
-<li>Be aware of negative bias with online communication. (If content is neutral, we assume the tone is negative.) Can you use positive language as opposed to neutral?.</li>
+<li>Aim to develop professional skills, group knowledge, and product quality, through group critique.</li>
+<li>Be aware of negative bias with online communication. (If the content is neutral, we assume the tone is negative.) Can you use positive language as opposed to neutral?.</li>
 <li>Use emoji to clarify tone. Compare “:sparkles: :sparkles: Looks good :+1: :sparkles: :sparkles:” to “Looks good.”</li>
 </ul>
 <h2 id="responding-to-feedback-on-pull-requests">Responding to feedback on Pull Requests</h2>
@@ -180,7 +331,7 @@ It helps the reviewer or teammate to quickly understand the intenson of the comm
 <ul>
 <li>Rebase is preferred to merge as it keeps the tree compact.</li>
 <li>Rebase your working branch before you start working and before you create a pull request.</li>
-<li>Always push your commits at the end of day, so in case of emergency, other team members can pick-up where you left.</li>
+<li>Always push your commits at the end of the day, so in case of emergency, other team members can pick up where you left.</li>
 </ul></div>
         </div>
 
